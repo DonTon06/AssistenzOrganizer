@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* Colours meet WCAG 2.1 AA contrast in both themes. */
+:root {
+  --background: #ffffff;
+  --foreground: #14202b;
+  --muted: #4a5a68;
+  --surface: #f2f6f8;
+  --border: #c3ced6;
+  --brand: #0f5f73;
+  --brand-foreground: #ffffff;
+  --danger: #b3261e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0e161c;
+    --foreground: #eef3f6;
+    --muted: #a9b8c4;
+    --surface: #18242d;
+    --border: #3a4b57;
+    --brand: #6cc4d8;
+    --brand-foreground: #06232b;
+    --danger: #ffb4ab;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-danger: var(--danger);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  /* Respect the user's font size setting; everything below is in rem. */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
