@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppHeader } from "@/components/app-header";
 import { SetupNotice } from "@/components/setup-notice";
 import { Card, PageShell } from "@/components/ui";
@@ -45,7 +46,14 @@ export default async function StartPage() {
                       <InviteButton teamId={m.teamId} role="assistant" label="Assistent*in einladen" />
                       <InviteButton teamId={m.teamId} role="proxy" label="Vertretung einladen" />
                     </div>
-                  ) : null}
+                  ) : (
+                    <Link
+                      href={`/angebote?team=${m.teamId}`}
+                      className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-brand px-5 text-lg font-semibold text-brand-foreground"
+                    >
+                      Angebote abgeben
+                    </Link>
+                  )}
                 </Card>
               </li>
             ))}

@@ -351,6 +351,36 @@ set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000b';
 select test_helpers.expect('deactivated assistant sees no team', (select count(*) from public.teams) = 0);
 select test_helpers.expect('deactivated assistant sees no offers', (select count(*) from public.offers) = 0);
 
+-- ----- Offer calendar ----------------------------------------------------------
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+insert into test_helpers.ids select 'next_month', public.open_offer_month(
+  test_helpers.id('team'), (date_trunc('month', public.berlin_today()) + interval '1 month')::date);
+select test_helpers.expect('assistants open next month with the team''s deadline',
+  (select deadline = date_trunc('month', public.berlin_today())::date + 14 and status = 'open'
+   from public.planning_months where id = test_helpers.id('next_month')));
+select test_helpers.expect('opening next month twice returns the same month',
+  public.open_offer_month(test_helpers.id('team'),
+    (date_trunc('month', public.berlin_today()) + interval '1 month' + interval '9 days')::date)
+  = test_helpers.id('next_month'));
+select test_helpers.expect('opening the current month returns the existing one',
+  public.open_offer_month(test_helpers.id('team'), public.berlin_today()) = test_helpers.id('current_month'));
+select test_helpers.expect_error('assistants cannot open months further ahead', format(
+  'select public.open_offer_month(%L, %L)', test_helpers.id('team'), '2099-01-01'));
+select test_helpers.expect('day summary lists every day of the month',
+  (select count(*) from public.month_day_summary(test_helpers.id('open_month'))) = 31);
+select test_helpers.expect('day summary has needs and approved hours of the whole team',
+  (select hours_needed = 24 and hours_approved = 24
+   from public.month_day_summary(test_helpers.id('open_month')) where date = '2099-12-03'));
+select test_helpers.expect('days without a need show none',
+  (select hours_needed is null and hours_approved = 0
+   from public.month_day_summary(test_helpers.id('open_month')) where date = '2099-12-04'));
+
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000c';
+select test_helpers.expect_error('outsiders cannot open months for offers', format(
+  'select public.open_offer_month(%L, %L)', test_helpers.id('team'), public.berlin_today()));
+select test_helpers.expect_error('outsiders cannot read the day summary', format(
+  'select * from public.month_day_summary(%L)', test_helpers.id('open_month')));
+
 -- ----- PINs ------------------------------------------------------------------
 reset role;
 reset request.jwt.claim.sub;
