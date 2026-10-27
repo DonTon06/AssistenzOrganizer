@@ -10,6 +10,13 @@
   --brand: #0f5f73;
   --brand-foreground: #ffffff;
   --danger: #b3261e;
+  /* Day and offer states: gaps, covered days, late offers. */
+  --gap: #8c1d18;
+  --gap-surface: #fde7e4;
+  --ok: #1e5e2f;
+  --ok-surface: #e1f3e5;
+  --late: #6b4500;
+  --late-surface: #fff0cc;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +29,12 @@
     --brand: #6cc4d8;
     --brand-foreground: #06232b;
     --danger: #ffb4ab;
+    --gap: #ffdad5;
+    --gap-surface: #5c1914;
+    --ok: #c8f0d0;
+    --ok-surface: #1d3d25;
+    --late: #ffe2a8;
+    --late-surface: #4a3300;
   }
 }
 
@@ -34,6 +47,12 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-danger: var(--danger);
+  --color-gap: var(--gap);
+  --color-gap-surface: var(--gap-surface);
+  --color-ok: var(--ok);
+  --color-ok-surface: var(--ok-surface);
+  --color-late: var(--late);
+  --color-late-surface: var(--late-surface);
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
