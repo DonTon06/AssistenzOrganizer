@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
+    "test": "node --test \"lib/**/*.test.ts\"",
     "test:db": "bash db-tests/run.sh",
     "db:start": "supabase start -x realtime,storage-api,imgproxy,studio,edge-runtime,logflare,vector,supavisor",
     "db:reset": "supabase db reset",

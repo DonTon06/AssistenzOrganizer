@@ -69,3 +69,25 @@ export function FormMessage({ error, children }: { error?: boolean; children: Re
     </p>
   );
 }
+
+/** A small label. Each tone also differs in text, never in colour alone. */
+export function Badge({
+  tone = "muted",
+  children,
+}: {
+  tone?: "ok" | "open" | "gap" | "late" | "muted";
+  children: ReactNode;
+}) {
+  const styles = {
+    ok: "bg-ok-surface text-ok",
+    open: "bg-surface text-foreground border border-border",
+    gap: "bg-gap-surface text-gap",
+    late: "bg-late-surface text-late",
+    muted: "bg-surface text-muted border border-border",
+  }[tone];
+  return (
+    <span className={`inline-flex items-center rounded-full px-3 py-0.5 text-sm font-semibold ${styles}`}>
+      {children}
+    </span>
+  );
+}

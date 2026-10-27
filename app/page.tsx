@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppHeader } from "@/components/app-header";
 import { SetupNotice } from "@/components/setup-notice";
 import { Card, PageShell } from "@/components/ui";
@@ -7,8 +8,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getSupabaseEnv } from "@/lib/supabase/env";
 import { InviteButton } from "./invite-button";
 
-// Start screen. The month overview, offers, approvals and swaps are built on
-// top of this in their own screens; for now it shows the caller's teams and roles.
+// Start screen. Shows the caller's teams and roles, and links managers to the
+// approval screen. The month overview, offers and swaps get their own screens.
 export default async function StartPage() {
   if (!getSupabaseEnv()) return <SetupNotice />;
 
@@ -42,6 +43,12 @@ export default async function StartPage() {
                   <p className="mb-4 text-muted">Deine Rolle: {ROLE_LABELS[m.role]}</p>
                   {isManagerRole(m.role) ? (
                     <div className="flex flex-col gap-3">
+                      <Link
+                        href={`/team/${m.teamId}/pruefen`}
+                        className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-brand px-5 text-lg font-semibold text-brand-foreground"
+                      >
+                        Angebote prüfen
+                      </Link>
                       <InviteButton teamId={m.teamId} role="assistant" label="Assistent*in einladen" />
                       <InviteButton teamId={m.teamId} role="proxy" label="Vertretung einladen" />
                     </div>

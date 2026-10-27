@@ -19,7 +19,15 @@ German UI, mobile first, installable as a PWA. Next.js 16 on a Supabase backend 
 - **Database schema** with row-level security for teams, members, invites, planning months,
   daily hour needs, offers and swap or sick requests, plus tests for the access rules.
 
-The calendar, approval, schedule and swap screens are built on top of this separately.
+- **Angebote prüfen** (`/team/<id>/pruefen?monat=2026-12`, employer and proxy): a month grid
+  of all days with gaps marked by colour and text, late offers in their own list, a day-by-day
+  list with hours needed, offered and approved, approve or decline per offer with an optional
+  comment, "Alle bestätigen", and publishing the schedule. Decisions can still change after
+  publishing. The start screen links to it for managers.
+
+The calendar, schedule and swap screens are built on top of this separately.
+
+Unit tests for the day sums run with `npm test` (Node 22.18+).
 
 ## Data model
 
