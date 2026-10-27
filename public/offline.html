@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Keine Verbindung · Assistenz-Planer</title>
+    <style>
+      body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: #fff; color: #14202b; line-height: 1.5; }
+      main { max-width: 32rem; margin: 0 auto; padding: 3rem 1.25rem; }
+      h1 { font-size: 1.5rem; }
+      button { font: inherit; font-weight: 600; min-height: 3rem; padding: 0 1.25rem; border: 0;
+        border-radius: 0.75rem; background: #0f5f73; color: #fff; }
+      @media (prefers-color-scheme: dark) {
+        body { background: #0e161c; color: #eef3f6; }
+        button { background: #6cc4d8; color: #06232b; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Keine Internetverbindung</h1>
+      <p>Der Assistenz-Planer braucht eine Verbindung, damit du immer den aktuellen Stand siehst.
+        Bitte prüfe dein WLAN oder deine mobilen Daten.</p>
+      <button type="button" onclick="location.reload()">Erneut versuchen</button>
+    </main>
+  </body>
+</html>
