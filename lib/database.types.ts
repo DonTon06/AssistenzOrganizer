@@ -271,10 +271,18 @@ isOneToOne: false
 "is_team_member":
 { Args: { "p_team_id": string }; Returns: boolean
                            },
+"month_day_summary":
+{ Args: { "p_planning_month_id": string }; Returns: {
+              "date": string,"hours_approved": number,"hours_needed": number | null
+            }[]
+                           },
 "my_shifts_in_other_teams":
 { Args: { "p_from": string,"p_team_id": string,"p_to": string }; Returns: {
               "date": string,"hours": number,"team_name": string
             }[]
+                           },
+"open_offer_month":
+{ Args: { "p_month": string,"p_team_id": string }; Returns: string
                            },
 "open_planning_month":
 { Args: { "p_month": string,"p_team_id": string }; Returns: string

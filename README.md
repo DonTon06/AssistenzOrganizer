@@ -16,6 +16,11 @@ German UI, mobile first, installable as a PWA. Next.js 16 on a Supabase backend 
   6-digit PIN with lockout. See [Sign-in](#sign-in).
 - **Roles:** employer (Arbeitgeber\*in), proxy (Vertretung) and assistant (Assistent\*in),
   per team. An assistant can be in several teams.
+- **Angebote abgeben** (`/angebote`): the assistant's month calendar. Pick whole, half or
+  quarter day, tap the days, add a note per day if needed, then submit. Each day shows the
+  hours still open. Next month opens by itself; the current month stays reachable for late
+  offers. Assistants in several teams switch teams at the top, and days that clash with an
+  approved shift in another team are marked.
 - **Database schema** with row-level security for teams, members, invites, planning months,
   daily hour needs, offers and swap or sick requests, plus tests for the access rules.
 
@@ -46,6 +51,11 @@ Rules worth knowing:
   flagged `is_late`.
 - Assistants can change or withdraw an offer until it is decided. Only managers (employer or
   proxy) approve, decline, set day needs and publish.
+- `open_offer_month()` lets any member open the current or next month, so next month's
+  planning is open as soon as someone looks at it. `open_planning_month()` stays managers-only
+  for any month.
+- `month_day_summary()` gives members each day's needed and approved hours (team totals, no
+  names), for the open hours on the offer calendar.
 - `my_shifts_in_other_teams()` returns an assistant's approved shifts in their other teams,
   for the clash warning on the offer screen.
 - Swaps go through the functions `create_swap_request`, `accept_swap_request`,
